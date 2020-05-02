@@ -28,8 +28,10 @@ if grep "$disk_destination" /proc/mounts; then
     exit 1
 fi
 
+mint_uuid="5fdab837-71dd-497d-b702-c304d1181f13"
+
 efi_partition="/dev/disk/by-partuuid/b65d01f3-19c7-4649-a68c-f8e6fcf5fd2a"
-mint_partition="/dev/disk/by-partuuid/5fdab837-71dd-497d-b702-c304d1181f13"
+mint_partition="/dev/disk/by-partuuid/${mint_uuid}"
 
 sgdisk -g --load-backup=table "$disk_destination"
 partprobe
@@ -44,7 +46,7 @@ sync
 
 # Aumentar a partição até ocupar disco inteiro
 sgdisk -d 2 "$disk_destination"
-sgdisk -n 0:0:0 "$disk_destination"
+sgdisk -n 0:0:0 -u "${mint_uuid}" "$disk_destination"
 partprobe
 while [ ! -e "$mint_partition" ]; do sleep 1; done
 e2fsck -f "$mint_partition"
