@@ -46,7 +46,8 @@ sync
 
 # Aumentar a partição até ocupar disco inteiro
 sgdisk -d 2 "$disk_destination"
-sgdisk -n 0:0:0 -u "${mint_uuid}" "$disk_destination"
+sgdisk -n 0:0:0  "$disk_destination"
+sgdisk -u "2:${mint_uuid}" "$disk_destination"
 partprobe
 while [ ! -e "$mint_partition" ]; do sleep 1; done
 e2fsck -f "$mint_partition"
