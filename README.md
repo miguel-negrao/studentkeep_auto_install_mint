@@ -1,5 +1,7 @@
 # Script para instalação automática de Linux Mint 
 
+V0.1.2
+
 ## Descrição
 
 Este script permite instalar o Linux Mint 64bits já com Zoom, Teams, Teamviewer e Skype instalados e preparado em modo OEM num computador de forma automatizada. 
